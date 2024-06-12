@@ -88,21 +88,76 @@ Quindi psemiminima, pcroma, psemicroma, psemibreve...con la "p" davanti si indic
 Nel codice si utilizza una struttura ```Nota``` per definire ogni singola nota della melodia. 
 Questa struttura include informazioni sulla frequenza della nota (```pitch```), sulla durata della nota (```durata```) e su altri paramenti come nota puntata o legata.
 
-Tralasciando gli aspetti tecnici, per creare una melodia l'inserimento delle note basterà recarsi nel codice nell'array Spartito.
+## 1° Passaggio
+### Individuare le note dallo spartito e inserirle nell'array
+
+<img src="https://www.leoravera.it/wp-content/uploads/2018/12/MI-SOL-SI-RE-FA.png" width=600 />
+
+Se leggiamo questo pentagramma sappiamo quindi che le note sono ```MI```, ```SOL```, ```SI```, ```RE```, ```FA```.
+Una volta trovate le note (che per comodità nell'immagine precedente sono già state segnate) potremmo procedere con l'inserimento :)
 
 ```
 Nota spartito[] = {
-    {DO6, "breve", true, false}, // Puntata
-    {0, "pausa-croma", false, false},
-    {DO6, "croma", false, false},
-    // Aggiungi altre note qui
+    {MI, "", false, false},
+    {SOL, "", false, false},
+    {SI, "", false, false},
+    {RE, "", false, false},
+    {FA, "", false, false},
 };
 ```
 
-Le durate delle note sono definite come stringhe (```breve```, ```semibreve```, ```minima```, ```semiminima```, ecc.
-Trovi la spiegazione completa sulla V1 nel file README.
+## 2° Passaggio
+### Individuare il valore della durata tramite il simbolo della nota
 
-Come si vede nell'esempio, tramite lo spartito bisognerà leggere la nota, inserirla, quindi DO, RE, MI, FA, SOL o altro, tenendo conto se è una nota # e tenendo conto anche dell'ottava utilizzata.
+Seguendo la tabella che segue possiamo inserire per ogni nota il suo valore di durata.
 
-Poi basterà leggere la simbologia e capire quindi la durata della nota, quindi inserire breve, semibreve, semiminima ecc. e poi inserire se puntata o legata.
+<img src="https://musicadiffusa.it/wp-content/uploads/2019/03/schema-per-durata-delle-note.jpg" width=300 />
+
+Nel mio caso, hanno tutte lo stesso simbolo, che equivale ad una semiminima.
+Quindi procediamo a inserire il valore di semiminima tra le virgolette accanto ad ogni nota.
+
+```
+Nota spartito[] = {
+    {MI7, "semiminima", false, false},
+    {SOL7, "semiminima", false, false},
+    {SI7, "semiminima", false, false},
+    {RE7, "semiminima", false, false},
+    {FA7, "semiminima", false, false},
+};
+```
+*Il numero vicino le note indica l'ottava, nel codice partono da 1 e arrivano fino a 8. Se si lascia la nota da sola senza numero il programma (l'IDE) darà errore e non eseguirà il codice.*
+
+## 3° Passaggio
+### Inserire i BPM per la nostra melodia.
+
+```const int BPM = 150;``` --> Più saranno alti, più la melodia sarà veloce, più saranno bassi più sarà lenta (le note dureranno di più o di meno in base ai BPM)
+
+## Note Puntate o Legate
+In caso di note *puntate* o *legate* ci basterà modificare i valori di ```true/false``` e ```true/false```.
+Nella prima condizione, il true equivale ad una nota puntata.
+Nella seconda condizione, il true equivale ad una nota legata (a quella sotto)
+
+```
+Nota spartito[] = {
+    {MI7, "semiminima", true, false},    // Nota puntata
+    {SOL7, "semiminima", false, false},
+    {SI7, "semiminima", true, false},     //Nota puntata
+    {RE7, "semiminima", false, false},
+    {FA7, "semiminima", false, false},
+};
+```
+
+Oppure se è legata
+
+```
+Nota spartito[] = {
+    {MI7, "semiminima", false, false},   
+    {SOL7, "semiminima", false, true},   // Legata a quella sotto
+    {SI7, "semiminima", false, false},  
+    {RE7, "semiminima", false, true},    // Legata a quella sotto
+    {FA7, "semiminima", false, false},
+};
+```
+
+
 
