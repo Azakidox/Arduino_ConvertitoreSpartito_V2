@@ -59,7 +59,7 @@ Quindi, tutti i "simboli" (pallini) scritti sulla seconda linea rappresenteranno
 
 <img src="https://pianoforteweb.it/wp-content/uploads/2021/11/chiave-di-violino-chiave-di-sol-1024x874.png" width=200 />
 
-Utilizzando questo principio, possiamo determinare anche le altre note.
+Avendo trovato una nota, possiamo determinare anche le altre note.
 
 <img src="https://cp.shb-cdn.com/cdn/app/statics/contents/books/CP2022_2613694F/html/50/assets/images/050_a.jpg" width=500 />
 
